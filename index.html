@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueryCraft - AI Data Analyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- WELCOME SCREEN -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="logo-large">
+                <i class="fa-solid fa-database"></i>
+            </div>
+            <h1>Welcome to QueryCraft</h1>
+            <p>Upload your data. Let AI handle the SQL.</p>
+            <button id="start-btn">Enter Dashboard <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="dashboard" class="hidden">
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <div class="logo-box"><i class="fa-solid fa-terminal"></i></div>
+                <span>QueryCraft</span>
+            </div>
+            <div class="user-profile">
+                <span>Vivek Chetan Anshuman TRIO</span>
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Data Source</h3>
+                    <p class="helper-text">Upload a CSV or JSON file</p>
+                    
+                    <!-- Hidden File Input -->
+                    <input type="file" id="db-upload" accept=".csv, .json" hidden>
+                    
+                    <button class="connect-btn" onclick="document.getElementById('db-upload').click()">
+                        <i class="fa-solid fa-upload"></i> Upload Database
+                    </button>
+                    <div id="file-status" class="status-msg">No file selected</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Detected Structure</h3>
+                    <ul class="file-tree" id="schema-list">
+                        <li class="empty-msg">Upload a file to see structure...</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content">
+                <div class="split-view">
+                    
+                    <!-- Left Panel: Input & Generator -->
+                    <div class="panel left-panel">
+                        <h2>Generate SQL queries</h2>
+                        <p class="subtitle">Ask questions about your uploaded data.</p>
+
+                        <div class="suggestions">
+                            <h4>Possible questions</h4>
+                            <ul id="suggestion-list">
+                                <li class="placeholder-item">Upload a database to see AI suggestions...</li>
+                            </ul>
+                            <div id="suggestion-loader" class="hidden">
+                                <i class="fa-solid fa-spinner fa-spin"></i> Analyzing your data structure...
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Question</label>
+                            <input type="text" id="user-question" placeholder="e.g., Show total sales...">
+                        </div>
+
+                        <!-- Result SQL Block -->
+                        <div class="sql-section">
+                            <div class="sql-header">
+                                <span>SQL query</span>
+                                <button id="generate-btn">Generate SQL</button>
+                            </div>
+                            <div class="code-block" id="sql-output">
+                                <span class="placeholder-text">SQL code will appear here...</span>
+                            </div>
+                        </div>
+
+                        <div id="loading-indicator" class="hidden">
+                            <i class="fa-solid fa-circle-notch fa-spin"></i> Gemini is thinking...
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Results & Viz -->
+                    <div class="panel right-panel">
+                        
+                        <!-- Table -->
+                        <div class="result-box">
+                            <h4>Query result</h4>
+                            <div class="table-container">
+                                <table id="result-table">
+                                    <thead>
+                                        <tr><th>Column</th><th>Value</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="2" class="empty-cell">No data generated yet</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Visualization -->
+                        <div class="result-box">
+                            <h4>Visualization</h4>
+                            <div class="chart-container">
+                                <canvas id="dataChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Explanation -->
+                        <div class="explanation-box">
+                            <h4>Query explanation</h4>
+                            <p id="explanation-text">
+                                Upload a file and generate a query to see the explanation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
