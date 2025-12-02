@@ -1,7 +1,7 @@
 // =========================================================
 // CONFIGURATION
 // =========================================================
-const API_KEY = "AIzaSyDgxOF29-n9ZG0Orf0hCgl7Ogwp__8YhyQ"; 
+const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 // =========================================================
 
 let currentSchema = "No file uploaded. User is asking general questions.";
